@@ -2,19 +2,20 @@ import requests
 class Terminal_Trader_App:
 
 	# communicate controller
-	def __init__(self):
+	def __init__(self, username = None, password = None, amount = None):
 		self.username = username
 		self.password = password
-		self.created_on = created_on
-		self.user_id = user_id
-		self.permission_level = permission_level
-		self.balance = balance
-		self.account_number = account_number
-		self.id = id_
-		self.user_id = user_id
 		self.amount = amount
+		# self.created_on = created_on
+		# self.user_id = user_id
+		# self.permission_level = permission_level
+		# self.balance = balance
+		# self.account_number = account_number
+		# self.id = id_
+		# self.user_id = user_id
 
 
+		self.user = User(self.username, self.username)
 		self.markit = Markit()
 		self.account = Account(self.balance, self.account_number, self.id, self.user_id, self.amount)
 
@@ -38,7 +39,6 @@ class Markit:
         
         if "LastPrice" in info:
             print(info["LastPrice"])
-
 
 class Game:
     def get_info(self, ticker):
@@ -80,13 +80,11 @@ class Game:
             print("you do not have enough stocks to sell that amount.")
         account_total = total_number_sell + portfolio_list
 
-class User:
+class User: #Mira
 		#get username, password, get corresponding data 
-	def __init__(self, user_id= None, username = None, password = None, permission_level = None):
+	def __init__(self, username = None, password = None):
 		self.username = username
 		self.password = password
-		self.user_id = user_id
-		self.permission_level = permission_level
 		self.db_manager = UserDBManager()
 
 
@@ -106,7 +104,6 @@ class User:
 	def create_user(self):
 		self.db_manager.create_client(self.username, self.password)
 
-
 	def view_dashboard(self):
 		dashboard = self.db_manager.view_dashboard(self.username)
 		initial_investment = 100,000 - (dashboard["Cash"])
@@ -115,32 +112,39 @@ class User:
 
 		return dashboard
 
-		"""users view their portfolio, the amount they have earned or lost, the amount of liquid cash they have available, etc. Make sure they are never looking at stale data. Think of some cool extras - maybe how their portfolio compares to the market average for the year?
-		"""
-
-
-
-class Account:
-	def __init__(self, account_id = None, cash = None, portfolio_worth = None, user_id = None):
-		self.account_id = account_id
-		self.cash = cash
-		self.portfolio_worth = portfolio_worth
+class Admin: #Jimmy
+	def init(self, user_id= None, username = None, password = None, permission_level = None):
+		self.username = username
+		self.password = password
 		self.user_id = user_id
+		self.permission_level = permission_level
+		self.db_manager = UserDBManager()
+
+	def find_permission_level(self):
+		permission_level = self.db_manager.find_permission_level(self.username)
+		return permission_level
+
+	def username_is_valid(self):
+		#check if username and password match
+		is_valid = self.db_manager.check_username(self.username)
+		return is_valid
+
+	def password_is_valid(self):
+		is_valid = self.db_manager.check_password(self.username, self.password)
+		return is_valid
+
+	def create_admin(self):
+		self.db_manager.create_admin(self.username, self.password)
 
 
-class Admin: 
-	def view_leaderboard(self):
+	def view_leaderboard(self)	
+		self.db_manager.view_leaderboard()
+
+
+
 		#Create a superuser who can see a leaderboard that displays the top 10 users by portfolio earnings
 		#get top 10 users
 		#get portfolio earnings
-
-
-
-
-
-
-
-
-
+		
 
 
