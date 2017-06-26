@@ -2,7 +2,7 @@ import trader_models
 import trader_views
 import get_lastprice
 
-class Controlller:
+class Controller:
 	def __init__(self):
 		view = trader_views.View()
 		self.type_ = None

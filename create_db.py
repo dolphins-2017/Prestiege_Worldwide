@@ -36,11 +36,10 @@ c.execute(command2)
 c.execute("""CREATE TABLE 'transactions' (
 'id' INTEGER PRIMARY KEY,
 'type' VARCHAR,
-'acct_id' INTEGER,
-'company_name' VARCHAR,
-'amount' INTEGER,
-'timestamp_' TIMESTAMP,
-FOREIGN KEY('acct_id') REFERENCES accounts('id')
+'account_id' INTEGER,
+'ticker' VARCHAR,
+'num_shares' INTEGER,
+FOREIGN KEY('account_id') REFERENCES accounts('id')
 );""")
 
 conn.commit()

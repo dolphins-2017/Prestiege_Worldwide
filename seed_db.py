@@ -20,7 +20,7 @@ def seed_users_table(num_clients,num_admins):
 		c.execute("""INSERT INTO users
 			(username, password, permission_level) 
 			VALUES 
-			(?, ?, ?, ?)
+			(?, ?, ?)
 			""",
 			(
 				fake.user_name(), fake.password(), 'client'
@@ -33,7 +33,7 @@ def seed_users_table(num_clients,num_admins):
 		c.execute("""INSERT INTO users
 			(username, password, permission_level) 
 			VALUES 
-			(?, ?, ?, ?)
+			(?, ?, ?)
 			""",
 			(
 				fake.user_name(), fake.password(), 'admin'
@@ -70,7 +70,7 @@ def seed_accounts_table(client_ids):
 				(?, ?, ?)
 				""",
 				(
-					100,000, 0, client_id
+					100000, 0, client_id
 
 
 				)
@@ -119,5 +119,11 @@ def seed_accounts_table(client_ids):
 def main():
 	client_ids = seed_users_table(100, 1)
 	account_ids = seed_accounts_table(client_ids)
+
+
+
+
+if __name__ == '__main__':
+	main()
 
 

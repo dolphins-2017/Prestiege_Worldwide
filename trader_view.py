@@ -26,6 +26,12 @@ class View:
 
 	def main_menu_admin:
 		#view leaderboard, quit
+
+
+	"""
+	101|maria92|363KJZ1q_#|admin
+	100|sean23|iS_9IhFcwz|client
+	"""
 		
 
 
