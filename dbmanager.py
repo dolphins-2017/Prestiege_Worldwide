@@ -4,12 +4,6 @@ conn = sqlite3.connect('mybank.db')
 c = conn.cursor()
 
 class UserDBManager:
-	#conduct sql queries
-
-	"""
-
-
-	"""
 
 	def check_username(self, username):
 		c.execute("""SELECT username
@@ -21,7 +15,7 @@ class UserDBManager:
 		else:
 			return False
 
-	def check_password(self):
+	def check_password(self, username, password):
 		querey_list = ["SELECT username, password FROM users WHERE username = '", username, "';"]
 		querey_string = "".join(querey_list)
 
@@ -33,15 +27,15 @@ class UserDBManager:
 		else:
 			return False
 
-	def create_client(self):
+	def create_client(self, username, password):
 		
 		c.execute("""INSERT INTO users
-			(username, password, created_on, permission_level) 
+			(username, password, permission_level) 
 			VALUES 
-			(?, ?, ?, ?)
+			(?, ?, ?)
 			""",
 			(
-				username, password, fake.date(), 'client'
+				username, password, 'client'
 					)
 		)
 		conn.commit()
@@ -69,93 +63,37 @@ class UserDBManager:
 
 		#list with tuple (id, balance, account_number, user_id )
 		return c.fetchall()
-		
+	 
 
-
-class AccountDBManager:
-
-
-	def create_account(self, balance, account_number, client_id):
-
-		c.execute("""INSERT INTO accounts
-				(balance, account_number, user_id) 
-				VALUES 
-				(?, ?, ?)
-				""",
-				(
-					balance, account_number, client_id
-
-				))
-	def get_account_number (self,username):
-		query = "SELECT account_number FROM accounts WHERE username = " + str (username) + " ;"
+	 def view_dashboard(self, username):
+		query = "SELECT id FROM users WHERE username =" + str(username) + " ;"
 		c.execute(query)
-		#get class id
-		account_number = (c.fetchall())[0][0]
-		return account_number
-
-
-	def withdraw(self, account_number, amount):
-		query =  "SELECT balance FROM accounts WHERE account_number = " + str (account_number) + " ;"
-		c.execute(query)
-		#get class id
-		balance = int((c.fetchall())[0][0])
-		remaining_balance = balance - amount
-
-		query_ = "UPDATE accounts SET balance = " + str(remaining_balance) + " WHERE account_number = " + str(account_number) + " ;"
+		user_id = (c.fetchall)[0][0]
+		query_ = "SELECT cash, portfolio_worth FROM accounts WHERE user_id = " + str (user_id) + " ;"
 		c.execute(query_)
+		cash = (c.fetchall)[0][0]
+		portfolio_worth = (c.fetchall)[0][1]
 
-		conn.commit()
+		return {"Cash": cash, "Portfolio Worth": portfolio_worth}
 
+	def view_leaderboard(self):
+		query = "SELECT users.username, accounts.portfolio_worth from users INNER JOIN accounts ON users.id = accounts.user_id ORDER BY portfolio_worth DESC LIMIT 10;"
 
-
-
-	def deposit(self, account_number, amount):
-		query =  "SELECT balance FROM accounts WHERE account_number = " + str (account_number) + " ;"
 		c.execute(query)
-		#get class id
-		balance = int((c.fetchall())[0][0])
-		new_balance = balance + amount
-
-		query_ = "UPDATE accounts SET balance = " + str(new_balance) + " WHERE account_number = " + str(account_number) + " ;"
-		c.execute(query_)
-
-		conn.commit()
+		return c.fetchall
 
 
 
-	def transfer(self, account_from, account_to, amount):
-
-		#withdraw amount from account_to
-		query =  "SELECT balance FROM accounts WHERE account_number = " + str (account_from) + " ;"
-		c.execute(query)
-		#get class id
-		balance = int((c.fetchall())[0][0])
-		remaining_balance = balance - amount
-
-		query_ = "UPDATE accounts SET balance = " + str(remaining_balance) + " WHERE account_number = " + str(account_from) + " ;"
-		c.execute(query_)
-
-		conn.commit()
 
 
-		#deposit amount into account_to
-		query2 =  "SELECT balance FROM accounts WHERE account_number = " + str (account_to) + " ;"
-		c.execute(query2)
-		#get class id
-		balance = int((c.fetchall())[0][0])
-		new_balance = balance + amount
 
-		query_2 = "UPDATE accounts SET balance = " + str(new_balance) + " WHERE account_number = " + str(account_to) + " ;"
-		c.execute(query_2)
-
-		conn.commit()
 
 class TransactionsDBManager:
 
 	def buy(self, company, how_much):
 
 	def get_balance(self):
-	
+
 		#
 	def sell(self):
 

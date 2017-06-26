@@ -2,19 +2,20 @@ import requests
 class Terminal_Trader_App:
 
 	# communicate controller
-	def __init__(self):
+	def __init__(self, username = None, password = None, amount = None):
 		self.username = username
 		self.password = password
-		self.created_on = created_on
-		self.user_id = user_id
-		self.permission_level = permission_level
-		self.balance = balance
-		self.account_number = account_number
-		self.id = id_
-		self.user_id = user_id
 		self.amount = amount
+		# self.created_on = created_on
+		# self.user_id = user_id
+		# self.permission_level = permission_level
+		# self.balance = balance
+		# self.account_number = account_number
+		# self.id = id_
+		# self.user_id = user_id
 
 
+		self.user = User(self.username, self.username)
 		self.markit = Markit()
 		self.account = Account(self.balance, self.account_number, self.id, self.user_id, self.amount)
 
@@ -62,20 +63,35 @@ class Game: #Andrew
 
 class User: #Mira
 		#get username, password, get corresponding data 
+	def __init__(self, username = None, password = None):
+		self.username = username
+		self.password = password
+		self.db_manager = UserDBManager()
 
 
-	def is_valid(self):
+	def find_permission_level(self):
+		permission_level = self.db_manager.find_permission_level(self.username)
+		return permission_level
+
+	def username_is_valid(self):
 		#check if username and password match
+		is_valid = self.db_manager.check_username(self.username)
+		return is_valid
 
-		pass
+	def password_is_valid(self):
+		is_valid = self.db_manager.check_password(self.username, self.password)
+		return is_valid
+
+	def create_user(self):
+		self.db_manager.create_client(self.username, self.password)
 
 	def view_dashboard(self):
-		pass
+		dashboard = self.db_manager.view_dashboard(self.username)
+		initial_investment = 100,000 - (dashboard["Cash"])
+		percent = (dashboard["Portfolio Worth"])/initial_investment
+		dashboard["percent earned/lost"] = percent
 
-		"""users view their portfolio, the amount they have earned or lost, the amount of liquid cash they have available, etc. Make sure they are never looking at stale data. Think of some cool extras - maybe how their portfolio compares to the market average for the year?
-		"""
-	def create_user(self):
-		pass
+		return dashboard
 
 class Admin: #Jimmy
 	def init(self, user_id= None, username = None, password = None, permission_level = None):
@@ -111,8 +127,5 @@ class Admin: #Jimmy
 		#get top 10 users
 		#get portfolio earnings
 		
-
-
-class Account: #Mira
 
 
