@@ -40,26 +40,45 @@ class Markit:
         if "LastPrice" in info:
             print(info["LastPrice"])
 
-
-class Game: #Andrew
-
-	def get_info(self, company_name):
-		#use API stuff
-		#to search companies and get the exact stock ticker symbol we want. 
-		#Our users also want to retreive the market data for a stock before they purchase it - we should obviously show them today's price,
-
-		#return all data, and price 
-
-	def buy(self):
-		#number of shares*current price
-		#get_info()
-		pass
-		#Buying should subtract from their funds and not let them buy more than they can afford,
-
-	def sell(self):
-		pass
-
-		#selling should return money to their cash funds and not let them sell more than they have.
+class Game:
+    def get_info(self, ticker):
+        self.ticker = str(ticker)
+        request = requests.get("http://dev.markitondemand.com/Api/v2/Quote/json?symbol=" + ticker)
+        info = request.json()
+        print(info)
+        if "LastPrice" in info:
+            print(info["LastPrice"])
+            return(info["LastPrice"])
+        #use API stuff
+        #to search companies and get the exact stock ticker symbol we want. 
+        #Our users also want to retreive the market data for a stock before they purchase it - we should obviously show them today's price,
+        #return all data, and price 
+    def buy(self, number):
+        number = input("number of shares that the person wants to buy")
+        get_info(input("stock they want to buy"))
+        Account()
+        portfolio_list = []
+        total_invested = (number * get_info())
+        if account_total - total_invested > 0:
+            portfolio_list.append(total_invested)
+            account_total = account_total - total_invested 
+        else: 
+            print("You do not have enough money in your account to complete the transaction.")
+        #number of shares*current price
+        #get_info()
+        pass
+        #Buying should subtract from their funds and not let them buy more than they can afford,
+    def sell(self, number):
+        number = input("number of shares that the person wants to sell")
+        input("stock they want to sell")
+        total_number_sell = number * get_info()
+        Account()
+        buy().portfolio_list 
+        if total_number_sell < portfolio_list:
+            portfolio_list[x] = portfolio_list[x] - total_number_sell
+        else:
+            print("you do not have enough stocks to sell that amount.")
+        account_total = total_number_sell + portfolio_list
 
 class User: #Mira
 		#get username, password, get corresponding data 
