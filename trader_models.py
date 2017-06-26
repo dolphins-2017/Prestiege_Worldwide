@@ -17,7 +17,7 @@ class Terminal_Trader_App:
 
 		self.user = User(self.username, self.username)
 		self.markit = Markit()
-		self.account = Account(self.balance, self.account_number, self.id, self.user_id, self.amount)
+
 
 class Markit:
 

@@ -40,6 +40,20 @@ class UserDBManager:
 		)
 		conn.commit()
 
+	def create_admin(self, username, password):
+		
+		c.execute("""INSERT INTO users
+			(username, password, permission_level) 
+			VALUES 
+			(?, ?, ?)
+			""",
+			(
+				username, password, 'admin'
+					)
+		)
+		conn.commit()
+
+
 	def find_permission_level(self, username):
 		query = "SELECT permission_level FROM users WHERE username = " + str (username) + " ;"
 		c.execute(query)
