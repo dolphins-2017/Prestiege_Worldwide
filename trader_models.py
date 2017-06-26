@@ -41,7 +41,7 @@ class Markit:
             print(info["LastPrice"])
 
 
-class Game:
+class Game: #Andrew
 
 	def get_info(self, company_name):
 		#use API stuff
@@ -61,7 +61,7 @@ class Game:
 
 		#selling should return money to their cash funds and not let them sell more than they have.
 
-class User:
+class User: #Mira
 		#get username, password, get corresponding data 
 	def __init__(self, username = None, password = None):
 		self.username = username
@@ -93,16 +93,39 @@ class User:
 
 		return dashboard
 
+class Admin: #Jimmy
+	def init(self, user_id= None, username = None, password = None, permission_level = None):
+		self.username = username
+		self.password = password
+		self.user_id = user_id
+		self.permission_level = permission_level
+		self.db_manager = UserDBManager()
+
+	def find_permission_level(self):
+		permission_level = self.db_manager.find_permission_level(self.username)
+		return permission_level
+
+	def username_is_valid(self):
+		#check if username and password match
+		is_valid = self.db_manager.check_username(self.username)
+		return is_valid
+
+	def password_is_valid(self):
+		is_valid = self.db_manager.check_password(self.username, self.password)
+		return is_valid
+
+	def create_admin(self):
+		self.db_manager.create_admin(self.username, self.password)
+
+
+	def view_leaderboard(self)	
+		self.db_manager.view_leaderboard()
 
 
 
-
-
-
-
-
-
-
-
+		#Create a superuser who can see a leaderboard that displays the top 10 users by portfolio earnings
+		#get top 10 users
+		#get portfolio earnings
+		
 
 
