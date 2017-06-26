@@ -39,7 +39,7 @@ c.execute("""CREATE TABLE 'transactions' (
 'acct_id' INTEGER,
 'company_name' VARCHAR,
 'amount' INTEGER,
-'timestamp' TIMESTAMP,
+'timestamp_' TIMESTAMP,
 FOREIGN KEY('acct_id') REFERENCES accounts('id')
 );""")
 
