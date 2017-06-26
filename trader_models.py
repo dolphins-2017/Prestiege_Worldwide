@@ -96,7 +96,7 @@ class User:
 		return dashboard
 
 		"""users view their portfolio, the amount they have earned or lost, the amount of liquid cash they have available, etc. Make sure they are never looking at stale data. Think of some cool extras - maybe how their portfolio compares to the market average for the year?
-		"""
+		""""s"
 
 
 
