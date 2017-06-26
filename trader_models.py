@@ -2,19 +2,20 @@ import requests
 class Terminal_Trader_App:
 
 	# communicate controller
-	def __init__(self):
+	def __init__(self, username = None, password = None, amount = None):
 		self.username = username
 		self.password = password
-		self.created_on = created_on
-		self.user_id = user_id
-		self.permission_level = permission_level
-		self.balance = balance
-		self.account_number = account_number
-		self.id = id_
-		self.user_id = user_id
 		self.amount = amount
+		# self.created_on = created_on
+		# self.user_id = user_id
+		# self.permission_level = permission_level
+		# self.balance = balance
+		# self.account_number = account_number
+		# self.id = id_
+		# self.user_id = user_id
 
 
+		self.user = User(self.username, self.username)
 		self.markit = Markit()
 		self.account = Account(self.balance, self.account_number, self.id, self.user_id, self.amount)
 
@@ -41,7 +42,8 @@ class Markit:
 
 
 class Game:
-
+	def __init__ (self):
+		self.db_manager = AccountDBMAnager() 
 	def get_info(self, company_name):
 		#use API stuff
 		#to search companies and get the exact stock ticker symbol we want. 
@@ -62,11 +64,9 @@ class Game:
 
 class User:
 		#get username, password, get corresponding data 
-	def __init__(self, user_id= None, username = None, password = None, permission_level = None):
+	def __init__(self, username = None, password = None):
 		self.username = username
 		self.password = password
-		self.user_id = user_id
-		self.permission_level = permission_level
 		self.db_manager = UserDBManager()
 
 
@@ -98,12 +98,12 @@ class User:
 
 
 class Account:
-	def __init__(self, account_id = None, cash = None, portfolio_worth = None, user_id = None):
-		self.account_id = account_id
-		self.cash = cash
-		self.portfolio_worth = portfolio_worth
-		self.user_id = user_id
-		self.db_manager = AccountDBMAnager() 
+	def __init__(self):
+		# self.account_id = account_id
+		# self.cash = cash
+		# self.portfolio_worth = portfolio_worth
+		# self.user_id = user_id
+
 
 	def view_leaderboard(self):
 		leaderboard = self.db_manager.view_leaderboard()

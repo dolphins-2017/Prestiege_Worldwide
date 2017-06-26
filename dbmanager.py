@@ -76,15 +76,15 @@ class UserDBManager:
 
 		return {"Cash": cash, "Portfolio Worth": portfolio_worth}
 
-
-
-class AccountDBManager:
-
-	def view_leaderboard(self, username):
+	def view_leaderboard(self):
 		query = "SELECT users.username, accounts.portfolio_worth from users INNER JOIN accounts ON users.id = accounts.user_id ORDER BY portfolio_worth DESC LIMIT 10;"
 
 		c.execute(query)
 		return c.fetchall
+
+class AccountDBManager:
+
+
 
 
 
