@@ -86,7 +86,6 @@ class User:
 	def create_user(self):
 		self.db_manager.create_client(self.username, self.password)
 
-
 	def view_dashboard(self):
 		dashboard = self.db_manager.view_dashboard(self.username)
 		initial_investment = 100,000 - (dashboard["Cash"])
@@ -95,8 +94,6 @@ class User:
 
 		return dashboard
 
-		"""users view their portfolio, the amount they have earned or lost, the amount of liquid cash they have available, etc. Make sure they are never looking at stale data. Think of some cool extras - maybe how their portfolio compares to the market average for the year?
-		"""
 
 
 
@@ -106,13 +103,12 @@ class Account:
 		self.cash = cash
 		self.portfolio_worth = portfolio_worth
 		self.user_id = user_id
+		self.db_manager = AccountDBMAnager() 
 
-
-class Admin: 
 	def view_leaderboard(self):
-		#Create a superuser who can see a leaderboard that displays the top 10 users by portfolio earnings
-		#get top 10 users
-		#get portfolio earnings
+		leaderboard = self.db_manager.view_leaderboard()
+
+		return leaderboard
 
 
 
