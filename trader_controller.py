@@ -1,30 +1,59 @@
 import trader_models
-import trader_views
+import trader_view
 import get_lastprice
 
 class Controller:
 	def __init__(self):
-		view = trader_views.View()
+		self.view = trader_view.View()
 		self.type_ = None
+		self.username = None
+		self.password = None
 
-	def type_user():
-		type_ = view.type_user()
+	def type_user(self):
+		type_ = self.view.type_user()
 		self.type = type_
+		if type_ == "n":
+			new_user()
+		elif type_ == "e":
+			self.username = self.view.username()
+			self.password = self.view.password()
 
-	def new_user:
-		#create account
-		#check if username is available
-		#calls fns in the model
+
+	def new_user():
 		pass
 
 
-	def is_valid:
-		#check if username/password are valid
-		pass
-	def main_menu():
-		#tidies up input, valid option?
-		pass
-	def parse_input()
+	def is_valid(self):
+		userinstance = trader_models.User(self.username, self.password)
+		user_is_valid = userinstance.username_is_valid()
+		pass_is_valid = userinstance.password_is_valid()
+		if user_is_valid and pass_is_valid == True:
+			print(" ")
+			print(" ")
+			print('Loading dashboard....')
+			return True
+		else:
+			return False
+
+		#100|sean23|iS_9IhFcwz|client
+
+
+	def main_menu(self):
+		userinstance = trader_models.User(self.username, self.password)
+
+		print('='*30)
+		print("  ")
+		print("  ")
+		print(userinstance.view_dashboard())
+		print(" ")
+		print(" ")
+		print("OPTIONS:	(BUY STOCK)		(SELL STOCK)		(QUIT)")
+		print("  ")
+		print("  ")
+
+
+
+	def parse_input():
 		#EX:	if pick == 'e':
 			#self.encrypt()
 		#if pick == 'd':
@@ -39,14 +68,16 @@ class Controller:
 		pass
 	def view_dashboard():
 		pass
-	def view_leaderboard()
-	pass
+	def view_leaderboard():
+		pass
 
 
 def main():
 	test = Controller()
 	user_type = test.type_user()
-	if user_type == "n":
-		test.new_user()
-	elif user_type == "e":
-		
+	validity = test.is_valid()
+	if validity == True:
+		test.main_menu()
+
+
+main()
