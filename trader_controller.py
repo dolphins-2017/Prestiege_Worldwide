@@ -1,15 +1,23 @@
 import trader_models
 import trader_views
+import get_lastprice
 
 class Controlller:
 	def __init__(self):
-		pass
-	def new_user:
+		view = trader_views.View()
+		self.type_ = None
 
+	def type_user():
+		type_ = view.type_user()
+		self.type = type_
+
+	def new_user:
 		#create account
 		#check if username is available
 		#calls fns in the model
 		pass
+
+
 	def is_valid:
 		#check if username/password are valid
 		pass
@@ -33,3 +41,12 @@ class Controlller:
 		pass
 	def view_leaderboard()
 	pass
+
+
+def main():
+	test = Controller()
+	user_type = test.type_user()
+	if user_type == "n":
+		test.new_user()
+	elif user_type == "e":
+		
