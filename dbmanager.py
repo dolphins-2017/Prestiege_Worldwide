@@ -40,6 +40,28 @@ class UserDBManager:
 				username, password, 'client'
 					)
 		)
+
+
+		conn.commit()
+
+
+		querey_lis = ["SELECT id FROM users WHERE username = '", username, "';"]
+		querey_str = ''.join(querey_lis)
+		c.execute(querey_str)
+
+		client_id = c.fetchall()[0][0]
+
+		c.execute("""INSERT INTO accounts
+				(cash, portfolio_worth, user_id) 
+				VALUES 
+				(?, ?, ?)
+				""",
+				(
+					100000, 0, client_id
+
+
+				)
+			)
 		conn.commit()
 
 	def create_admin(self, username, password):
@@ -102,8 +124,6 @@ class UserDBManager:
 
 		c.execute(query)
 		return c.fetchall
-
-
 
 
 

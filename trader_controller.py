@@ -13,14 +13,17 @@ class Controller:
 		type_ = self.view.type_user()
 		self.type = type_
 		if type_ == "n":
-			new_user()
+			self.new_user()
 		elif type_ == "e":
 			self.username = self.view.username()
 			self.password = self.view.password()
 
 
-	def new_user():
-		pass
+	def new_user(self):
+		self.username = self.view.username()
+		self.password = self.view.password()
+		userinstance = trader_models.User(self.username, self.password)
+		userinstance.create_user()
 
 
 	def is_valid(self):
