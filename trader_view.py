@@ -1,7 +1,12 @@
 class View:
 	#print/input
+	def __init__():
+		self.username = username
+
+
 	def type_user:
-		#new user or existing user?
+		type_ = input("Hi, there! Welcome to the stock trader app. Are you a new user or existing user? Type 'n' or 'e'!\n")
+		return type
 
 	def new_user:
 		#ask for username, password
@@ -9,13 +14,15 @@ class View:
 		#check if username is available
 
 	def username:
-		#asks for, / returns username
+		username = input("What is your username?")
+		return username
 	def password:
-		#ask for password
+		pass_ = input("What is your password?")
+		return pass_
 
 	def main_menu_user:
-		#buy, sell, view dashboard, quit
-		#return whatever option they choose
+		print("Welcome to your dashboard, " + str(self.username) + "!")
+		print("Your current account balance is: " )
 
 	def main_menu_admin:
 		#view leaderboard, quit
