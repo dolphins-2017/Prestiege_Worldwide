@@ -42,8 +42,7 @@ class Markit:
 
 
 class Game:
-	def __init__ (self):
-		self.db_manager = AccountDBMAnager() 
+
 	def get_info(self, company_name):
 		#use API stuff
 		#to search companies and get the exact stock ticker symbol we want. 
@@ -96,19 +95,6 @@ class User:
 
 
 
-
-class Account:
-	def __init__(self):
-		# self.account_id = account_id
-		# self.cash = cash
-		# self.portfolio_worth = portfolio_worth
-		# self.user_id = user_id
-
-
-	def view_leaderboard(self):
-		leaderboard = self.db_manager.view_leaderboard()
-
-		return leaderboard
 
 
 

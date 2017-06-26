@@ -82,7 +82,7 @@ class UserDBManager:
 		c.execute(query)
 		return c.fetchall
 
-class AccountDBManager:
+
 
 
 
