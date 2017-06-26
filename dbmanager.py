@@ -4,12 +4,6 @@ conn = sqlite3.connect('mybank.db')
 c = conn.cursor()
 
 class UserDBManager:
-	#conduct sql queries
-
-	"""
-
-
-	"""
 
 	def check_username(self, username):
 		c.execute("""SELECT username
@@ -21,7 +15,7 @@ class UserDBManager:
 		else:
 			return False
 
-	def check_password(self):
+	def check_password(self, username, password):
 		querey_list = ["SELECT username, password FROM users WHERE username = '", username, "';"]
 		querey_string = "".join(querey_list)
 
@@ -33,15 +27,15 @@ class UserDBManager:
 		else:
 			return False
 
-	def create_client(self):
+	def create_client(self, username, password):
 		
 		c.execute("""INSERT INTO users
-			(username, password, created_on, permission_level) 
+			(username, password, permission_level) 
 			VALUES 
-			(?, ?, ?, ?)
+			(?, ?, ?)
 			""",
 			(
-				username, password, fake.date(), 'client'
+				username, password, 'client'
 					)
 		)
 		conn.commit()
@@ -69,7 +63,17 @@ class UserDBManager:
 
 		#list with tuple (id, balance, account_number, user_id )
 		return c.fetchall()
-		
+	 
+	def view_dashboard(self, username):
+		query = "SELECT id FROM users WHERE username =" + str(username) + " ;"
+		c.execute(query)
+		user_id = (c.fetchall)[0][0]
+		query_ = "SELECT cash, portfolio_worth FROM accounts WHERE user_id = " + str (user_id) + " ;"
+		c.execute(query_)
+		cash = (c.fetchall)[0][0]
+		portfolio_worth = (c.fetchall)[0][1]
+
+		return {"Cash": cash, "Portfolio Worth": portfolio_worth}
 
 
 class AccountDBManager:
@@ -155,7 +159,7 @@ class TransactionsDBManager:
 	def buy(self, company, how_much):
 
 	def get_balance(self):
-	
+
 		#
 	def sell(self):
 
