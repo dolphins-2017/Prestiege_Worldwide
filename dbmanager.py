@@ -13,9 +13,9 @@ class UserDBManager:
 		usernames = c.fetchall()
 		username_list = [username[0] for username in usernames]
 		if username in username_list:
-			return True
-		else:
 			return False
+		else:
+			return True
 
 	def check_password(self, username, password):
 		querey_list = ["SELECT username, password FROM users WHERE username = '", username, "';"]
@@ -45,11 +45,13 @@ class UserDBManager:
 		conn.commit()
 
 
-		querey_lis = ["SELECT id FROM users WHERE username = '", username, "';"]
-		querey_str = ''.join(querey_lis)
-		c.execute(querey_str)
 
-		client_id = c.fetchall()[0][0]
+
+	def create_account (self, username):
+		query = "SELECT id FROM users WHERE username = '" + str(username) + "';"
+		c.execute(query)
+
+		client_id = (c.fetchall())[0][0]
 
 		c.execute("""INSERT INTO accounts
 				(cash, portfolio_worth, user_id) 
@@ -195,7 +197,7 @@ class TransactionsDBManager:
 	
 		#Buying should subtract from their funds and not let them buy more than they can afford,
 
-
+		return True
 
 	def sell(self, username, num_shares, ticker, last_price):
 		#get user_id
