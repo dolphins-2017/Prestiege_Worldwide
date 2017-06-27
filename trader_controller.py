@@ -23,7 +23,7 @@ class Controller:
 				self.username = self.view.username()
 				self.password = self.view.password()
 				self.trader_app = Terminal_Trader_App(self.username, self.password)
-				is_valid = trader_app.user.password_is_valid()
+				is_valid = self.trader_app.user.password_is_valid()
 
 
 
@@ -47,8 +47,7 @@ class Controller:
 	def permission_level(self):
 		#find permission_level
 		permission_level = self.trader_app.user.find_permission_level()
-		print(permission_level)
-		main_menu(permission_level)
+		self.main_menu(permission_level)
 
 
 	def main_menu(self, permission_level, error=None):
@@ -83,12 +82,12 @@ class Controller:
 
 	def get_last_price(self, ticker):
 		last_price = self.trader_app.game.get_info(ticker)
-		chocie = self.view.last_price(last_price, ticker)
+		choice = self.view.last_price(last_price, ticker)
 		return choice
 
 	def buy(self):
 		ticker = self.view.ticker()
-		choice = self.get_last_price(ticker)
+		pick = self.get_last_price(ticker)
 		if pick == 'y':
 			num_shares = self.view.num_shares(ticker)
 			status = self.trader_app.game.buy(ticker,num_shares)
@@ -100,7 +99,7 @@ class Controller:
 
 	def sell(self):
 		ticker = self.view.ticker()
-		choice = self.get_last_price(ticker)
+		pick = self.get_last_price(ticker)
 		if pick == 'y':
 			num_shares = self.view.num_shares(ticker)
 			self.trader_app.game.sell(ticker,num_shares)

@@ -148,14 +148,14 @@ class TransactionsDBManager:
 		account_id = info[0][2]
 
 
-		cost = num_shares * last_price
-		new_cash = cash - cost
+		cost = float(num_shares) * float(last_price)
+		new_cash = float(cash) - float(cost)
 
 		#check if user has enough money
 		if new_cash < 0:
 			return False 
 
-		new_portfolio_worth = portfolio_worth + cost
+		new_portfolio_worth = float(portfolio_worth) + float(cost)
 
 
 
@@ -216,11 +216,11 @@ class TransactionsDBManager:
 		account_id = info[0][2]
 
 
-		cost = num_shares * last_price
-		new_cash = cash + cost
+		cost = float(num_shares) * float(last_price)
+		new_cash = float(cash) + float(cost)
 
 
-		new_portfolio_worth = portfolio_worth - cost
+		new_portfolio_worth = float(portfolio_worth) - float(cost)
 
 
 

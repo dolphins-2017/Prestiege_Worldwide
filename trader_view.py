@@ -4,7 +4,7 @@ class View:
 		type_ = input("Hi, there! Welcome to the stock trader app. Are you a new user or existing user? Type 'n' or 'e'!\n")
 		return type_.lower()
 
-	def username(self, error):
+	def username(self):
 		username = input("What is your username?\n")
 		return username
 	
@@ -29,7 +29,7 @@ class View:
 		print("           ('L')            		('X')")
 		print("  ")
 		print("  ")
-		return input('\n').lower()strip()
+		return input('\n').lower().strip()
 
 
 	def main_menu_user(self, error=None):
@@ -44,12 +44,11 @@ class View:
 		print("  ")
 		print(" ")
 		print(" ")
-		print("OPTIONS:	BUY STOCK		SELL STOCK		VIEW DASHBOARD		QUIT")
-		print("           ('B')            ('S')           ('D')            ('X') ")
+		print("OPTIONS:	BUY STOCK ('B')		SELL STOCK ('S')	VIEW DASHBOARD('D')		QUIT('X')")
 		print("  ")
 		print("  ")
 
-		return input('? \n').lower()strip()
+		return input('? \n').lower().strip()
 
 	
 	def ticker(self, error=None):
@@ -60,11 +59,11 @@ class View:
 		return ticker
 
 	def last_price(self, last_price, ticker):
-		print("The price of" + str(ticker) + "is" + str(last_price) + "per share.")
+		print("The price of " + str(ticker) + " is " + str(last_price) + " per share.")
 		return input("Would you still like to buy/sell the stock[y/n]?")
 
 	def num_shares(self, ticker):
-		return input("How many shares of " + str(ticker) + "would you like to buy/sell? \n")
+		return input("How many shares of " + str(ticker) + " would you like to buy/sell? \n")
 
 	def buy(self, error=None):
 		if error:
